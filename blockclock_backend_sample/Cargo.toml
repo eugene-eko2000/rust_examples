@@ -1,0 +1,19 @@
+[package]
+name = "blockclock-backend"
+version = "1.1.8"
+edition = "2021"
+
+[dependencies]
+axum = { version = "0.8.1", features = ["ws"] }
+axum-util = "0.2.2"
+clap = { version = "4.5.28", features = ["derive"] }
+ethers = { version = "2.0.14", features = ["ws"] }
+log = "0.4.25"
+md5 = "0.7.0"
+mysql = "26.0.0"
+parse_duration = "2.1.1"
+serde = "1.0.217"
+serde_json = "1.0.138"
+stderrlog = "0.6.0"
+tokio = { version = "1.43.0", features = ["full"] }
+tower-http = { version = "0.6.2", features = ["cors"] }
