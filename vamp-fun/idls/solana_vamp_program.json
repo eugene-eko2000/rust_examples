@@ -1,0 +1,423 @@
+{
+  "address": "CABA3ibLCuTDcTF4DQXuHK54LscXM5vBg7nWx1rzPaJH",
+  "metadata": {
+    "name": "solana_vamp_program",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "claim",
+      "discriminator": [
+        62,
+        198,
+        214,
+        193,
+        213,
+        159,
+        108,
+        210
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "vamp_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  109,
+                  112
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint_account"
+              }
+            ]
+          }
+        },
+        {
+          "name": "claim_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  108,
+                  97,
+                  105,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vamp_state"
+              },
+              {
+                "kind": "arg",
+                "path": "eth_address"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint_account"
+              }
+            ]
+          }
+        },
+        {
+          "name": "claimer_token_account",
+          "writable": true
+        },
+        {
+          "name": "mint_account"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "eth_address",
+          "type": {
+            "array": [
+              "u8",
+              20
+            ]
+          }
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "eth_signature",
+          "type": {
+            "array": [
+              "u8",
+              65
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_token_mint",
+      "discriminator": [
+        35,
+        109,
+        237,
+        196,
+        54,
+        218,
+        33,
+        119
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mint_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  105,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "arg",
+                "path": "_vamp_identifier"
+              }
+            ]
+          }
+        },
+        {
+          "name": "metadata_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  101,
+                  116,
+                  97,
+                  100,
+                  97,
+                  116,
+                  97
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "token_metadata_program"
+              },
+              {
+                "kind": "account",
+                "path": "mint_account"
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "token_metadata_program"
+            }
+          }
+        },
+        {
+          "name": "vamp_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  109,
+                  112
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint_account"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint_account"
+              }
+            ]
+          }
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "token_metadata_program",
+          "address": "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "vamp_identifier",
+          "type": "u64"
+        },
+        {
+          "name": "vamping_data",
+          "type": "bytes"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "ClaimState",
+      "discriminator": [
+        71,
+        73,
+        19,
+        83,
+        53,
+        228,
+        242,
+        53
+      ]
+    },
+    {
+      "name": "VampState",
+      "discriminator": [
+        222,
+        91,
+        2,
+        48,
+        244,
+        96,
+        192,
+        196
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "TokenMintCreated",
+      "discriminator": [
+        158,
+        52,
+        171,
+        143,
+        62,
+        205,
+        222,
+        38
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidProof",
+      "msg": "Invalid Merkle proof"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidTokenMint",
+      "msg": "Token mint mismatch"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidMerkleProof",
+      "msg": "Invalid Merkle proof provided."
+    },
+    {
+      "code": 6003,
+      "name": "InvalidSignature",
+      "msg": "Invalid Ethereum signature provided."
+    },
+    {
+      "code": 6004,
+      "name": "InvalidAddress",
+      "msg": "Invalid Ethereum address provided."
+    },
+    {
+      "code": 6005,
+      "name": "InvalidTokenMapping",
+      "msg": "Invalid token mapping provided."
+    }
+  ],
+  "types": [
+    {
+      "name": "ClaimState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "is_claimed",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TokenMintCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mint_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "token_name",
+            "type": "string"
+          },
+          {
+            "name": "token_symbol",
+            "type": "string"
+          },
+          {
+            "name": "token_erc20_address",
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VampState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "mint",
+            "type": "pubkey"
+          }
+        ]
+      }
+    }
+  ]
+}

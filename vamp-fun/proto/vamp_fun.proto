@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package vamp.fun;
+
+// The token mapping. Contains two parallel arrays of addresses and amounts.
+message TokenMappingProto {
+  // Ethereum Addresses.
+  repeated bytes addresses = 1;
+  // Amounts.
+  repeated uint64 amounts = 2;
+}
+
+// The token vamping info. Contains the merkle root, name, symbol, uri, amount, decimal and token mapping.
+message TokenVampingInfoProto {
+  // [DEPRECATED] Merkle root of the token mapping computed from .
+  bytes merkle_root = 1;
+  // Name of the token.
+  string token_name = 2;
+  // Symbol of the token.
+  string token_symbol = 3;
+  // Token ERC20 contract address.
+  bytes token_erc20_address = 4;
+  // URI of the token.
+  optional string token_uri = 5;
+  // Amount of the token.
+  uint64 amount = 6;
+  // Decimal of the token.
+  uint32 decimal = 7;
+  // [DEPRECATED] Token mapping.
+  TokenMappingProto token_mapping = 8;
+  // Chain ID of the source Ethereum chain.
+  uint64 chain_id = 9;
+  // The salt for the vamp.fun vamping.
+  uint64 salt = 10;
+  // The solver public key.
+  bytes solver_public_key = 11;
+  // The validator public key.
+  bytes validator_public_key = 12;
+  // The intent ID.
+  bytes intent_id = 13;
+}
+
+// Solver-Validator interaction for vamp.fun
+
+// The partial case of SolutionForValidation for vamp.fun
+message VampSolutionForValidationProto {
+  string intent_id = 1;
+  string solver_pubkey = 2;
+
+  map<string, IndividualBalanceEntry> individual_balance_entry_by_oth_address = 3;
+}
+
+message IndividualBalanceEntry {
+  uint64 balance = 1;
+  string solver_individual_balance_sig = 2;
+  string validator_individual_balance_sig = 3;
+}
+
+// The partial case of SolutionValidatedDetails for vamp.fun
+message VampSolutionValidatedDetailsProto {
+  // The root folder CID (IPFS unique ID).
+  // For the flow when Validator submits the IPFS mapping himself.
+  string root_intent_cid = 1;
+  // The mapping of the CID (IPFS unique ID) for individual balance entry by the OriginalTokenHolders (OTH Address)
+  map<string, string> cid_by_oth_address = 2;
+}
